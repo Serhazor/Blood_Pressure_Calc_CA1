@@ -25,18 +25,6 @@ jobs:
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
-    - name: OWASP ZAP Scan #pen testing
-      run: |
-        docker run -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
-    - name: Auto Merge #merging if tests are successful automatically
-      if: github.ref == 'refs/heads/new-feature-branch' && steps.test.outcome == 'success'
-      run: |
-        git fetch origin master
-        git checkout master
-        git merge --ff-only ${{ github.head_ref }}
-        git push origin master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
     - name: Publish Artifacts
@@ -44,6 +32,13 @@ jobs:
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+  zap-scan:
+    runs-on: ubuntu-latest  # Using a Linux runner
+    needs: build  # This job needs to run after the build job
+    steps:
+    - name: OWASP ZAP Scan
+      run: |
+        docker run -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
   deploy:
     runs-on: windows-latest
     needs: build
