@@ -25,6 +25,9 @@ jobs:
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
+    - name: OWASP ZAP Scan #pen testing
+      run: |
+        docker run -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
     - name: Auto Merge #merging if tests are successful automatically
       if: github.ref == 'refs/heads/new-feature-branch' && steps.test.outcome == 'success'
       run: |
