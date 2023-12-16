@@ -38,7 +38,9 @@ jobs:
     steps:
     - name: OWASP ZAP Scan
       run: |
-        docker run --user root -v $(pwd)/zap-reports:/zap/wrk -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
+        mkdir -p zap-reports
+        chmod 777 zap-reports
+        docker run -v $(pwd)/zap-reports:/zap/wrk -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
   deploy:
     runs-on: windows-latest
     needs: build
