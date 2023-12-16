@@ -25,6 +25,15 @@ jobs:
       run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-restore
     - name: Test
       run: dotnet test "${{ env.WORKING_DIRECTORY }}" --no-build
+    - name: Auto Merge #merging if tests are successful automatically
+      if: github.ref == 'refs/heads/new-feature-branch' && steps.test.outcome == 'success'
+      run: |
+        git fetch origin master
+        git checkout master
+        git merge --ff-only ${{ github.head_ref }}
+        git push origin master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Publish
       run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
     - name: Publish Artifacts

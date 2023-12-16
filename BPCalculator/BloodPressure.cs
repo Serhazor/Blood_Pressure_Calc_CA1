@@ -13,6 +13,8 @@ namespace BPCalculator
         [Display(Name = "Ideal Blood Pressure")] Ideal,
         [Display(Name = "Pre-High Blood Pressure")] PreHigh,
         [Display(Name = "High Blood Pressure")] High,
+        [Display(Name = "Isolated Systolic Hypertension")] IsolatedSystolic,
+        [Display(Name = "Isolated Diastolic Hypertension")] IsolatedDiastolic,
         [Display(Name = "Unknown")] Unknown // NEW LINE
     };
 
@@ -40,6 +42,17 @@ namespace BPCalculator
             }*/
             get
             {
+                // Isolated Systolic Hypertension (High Systolic, Normal Diastolic)
+                if (Systolic > 140 && Diastolic < 90)
+                {
+                    return BPCategory.IsolatedSystolic;
+                }
+
+                // Isolated Diastolic Hypertension (Normal Systolic, High Diastolic)
+                if (Systolic < 140 && Diastolic > 90)
+                {
+                    return BPCategory.IsolatedDiastolic;
+                }
                 // Low Blood Pressure
                 if ((Systolic >= 70 && Systolic <= 90) && (Diastolic >= 40 && Diastolic <= 60))
                 {
