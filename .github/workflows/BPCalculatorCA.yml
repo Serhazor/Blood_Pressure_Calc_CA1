@@ -9,11 +9,12 @@ env:
   CONFIGURATION: Release
   DOTNET_CORE_VERSION: 6.0.x
   WORKING_DIRECTORY: BPCalculator
+  BPCALCULATOR_BASE_URL: 'https://bpcalculatorca.azurewebsites.net/'
 jobs:
   build:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v4 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
