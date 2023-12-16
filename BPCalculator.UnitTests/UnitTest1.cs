@@ -57,6 +57,19 @@ namespace BPCalculator.UnitTests
             // Assert
             Assert.AreEqual(BPCategory.PreHigh, result, "Blood pressure should be classified as Pre-High.");
         }
+        [TestMethod]
+        public void Category_ShouldReturnIsolatedSystolic_WhenSystolicIsHighAndDiastolicIsNormal()
+        {
+            var bp = new BloodPressure { Systolic = 150, Diastolic = 80 };
+            Assert.AreEqual(BPCategory.IsolatedSystolic, bp.Category, "Should be Isolated Systolic Hypertension.");
+        }
+
+        [TestMethod]
+        public void Category_ShouldReturnIsolatedDiastolic_WhenDiastolicIsHighAndSystolicIsNormal()
+        {
+            var bp = new BloodPressure { Systolic = 120, Diastolic = 95 };
+            Assert.AreEqual(BPCategory.IsolatedDiastolic, bp.Category, "Should be Isolated Diastolic Hypertension.");
+        }
 
         [TestMethod]
         public void Category_ShouldReturnUnknown_WhenPressureIsOutOfRange()
