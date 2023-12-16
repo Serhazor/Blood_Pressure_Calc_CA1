@@ -32,13 +32,13 @@ jobs:
       with:
         name: webapp
         path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
-  zap-scan:
-    runs-on: ubuntu-latest  # Using a Linux runner
-    needs: build  # This job needs to run after the build job
+  zap-scan: #Pen Test
+    runs-on: ubuntu-latest  #To run on Linux instead of Windows
+    needs: build
     steps:
     - name: OWASP ZAP Scan
       run: |
-        docker run -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
+        docker run -v $(pwd)/zap-reports:/zap/wrk -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
   deploy:
     runs-on: windows-latest
     needs: build
