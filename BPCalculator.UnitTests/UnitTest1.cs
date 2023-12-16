@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BPCalculator;
+//adding test comment to check auto merge post manual merge
 
 namespace BPCalculator.UnitTests
 {
