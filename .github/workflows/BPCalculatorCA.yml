@@ -38,14 +38,13 @@ jobs:
     steps:
       - name: OWASP ZAP Scan
         run: |
-          docker run -v $(pwd)/zap-reports:/zap/wrk -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ -J zap-report.json
+          docker run -t owasp/zap2docker-stable zap-baseline.py -t https://bpcalculatorca.azurewebsites.net/ > zap-report.txt
 
       - name: Upload ZAP Report
-        if: always()  # This ensures the report is uploaded even if the ZAP scan fails
         uses: actions/upload-artifact@v2
         with:
           name: zap-report
-          path: zap-reports/zap-report.json
+          path: zap-report.txt
   deploy:
     runs-on: windows-latest
     needs: build
