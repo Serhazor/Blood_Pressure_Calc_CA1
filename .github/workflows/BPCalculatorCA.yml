@@ -43,7 +43,7 @@ jobs:
 
       - name: Upload ZAP Report
         if: always()  # This ensures the report is uploaded regardless of the ZAP scan outcome
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: zap-report
           path: zap-report.txt
