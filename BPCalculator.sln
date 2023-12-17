@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.UnitTests", "B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.SeleniumTests", "BPCalculator.SeleniumTests\BPCalculator.SeleniumTests.csproj", "{CC0A5315-4306-423F-A8DF-6CE258480247}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BPCalculator.SpecFlowTests", "BPCalculator.SpecFlowTests\BPCalculator.SpecFlowTests.csproj", "{682FE109-AEC7-4C80-A680-9AE029C09814}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +32,10 @@ Global
 		{CC0A5315-4306-423F-A8DF-6CE258480247}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC0A5315-4306-423F-A8DF-6CE258480247}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC0A5315-4306-423F-A8DF-6CE258480247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{682FE109-AEC7-4C80-A680-9AE029C09814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{682FE109-AEC7-4C80-A680-9AE029C09814}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{682FE109-AEC7-4C80-A680-9AE029C09814}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{682FE109-AEC7-4C80-A680-9AE029C09814}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
