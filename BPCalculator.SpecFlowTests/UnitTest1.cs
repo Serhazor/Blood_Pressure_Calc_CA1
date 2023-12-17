@@ -14,7 +14,7 @@ namespace BPCalculator.SpecFlowTests.Steps
 
         public BloodPressureSteps()
         {
-            // Initialize the ChromeDriver (or any other driver)
+            // Initialize the ChromeDriver
             _driver = new ChromeDriver();
         }
 
